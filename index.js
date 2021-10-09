@@ -27,7 +27,7 @@ app.post('/webhook', (req, res) => {
                     error: error
                 })
             }
-            botDeploy(req.body.controlRoomUrl, token, req.body.botId, userId, (error, {deploymentId}={})=>{
+            botDeploy(req.body.controlRoomUrl, token, req.body.botId, userId, req.body.botInput, (error, {deploymentId}={})=>{
                 if(error){
                     return res.send({
                         error: error
