@@ -27,18 +27,27 @@ app.post('/webhook', (req, res) => {
                     error: error
                 })
             }
-            botDeploy(req.body.controlRoomUrl, token, req.body.botId, userId, req.body.botInput, (error, {deploymentId}={})=>{
+            botDeploy(req.body.controlRoomUrl, token, req.body.botId, userId, req.body.botInput, req.body.callbackInfo, (error, {deploymentId}={})=>{
                 if(error){
                     return res.send({
                         error: error
                     })
                 }
+                
                 res.send({
-                    deploymentId: deploymentId
+                    deploymentId: deploymentId,
+                    callbackInfo: req.body.callbackInfo
                 })
             })
         })
     })
+});
+
+
+app.post('/output', (req, res) => {
+    console.log('Status: ' + req.body.status)
+    console.log('String output: ' + req.body.botOutput.output.string)
+    res.send('Thanks for sharing')
 });
 
 const server = app.listen(process.env.PORT || 3000, () => {
