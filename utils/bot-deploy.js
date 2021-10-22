@@ -2,7 +2,7 @@ const request = require('request')
 
 //Return the run as user ID to be used in the bot deployment API
 
-const botDeploy = (crURL, token, botID, runAsUserID, botInput, callbackInfo, callback) => {
+const botDeploy = (crURL, token, botID, runAsUserID, poolId, botInput, callbackInfo, callback) => {
     const url = crURL + 'v3/automations/deploy'
     request({
         url : url,
@@ -16,7 +16,7 @@ const botDeploy = (crURL, token, botID, runAsUserID, botInput, callbackInfo, cal
             'callbackInfo': callbackInfo,
             'botInput': botInput,
             'runAsUserIds':[runAsUserID],
-            'poolIds': [],
+            'poolIds': [poolId],
             'overrideDefaultDevice': false
         },
         json: true

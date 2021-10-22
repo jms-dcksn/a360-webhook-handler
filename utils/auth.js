@@ -17,9 +17,9 @@ const auth = (crURL, userName, apiKey, callback) => {
         json: true
       }, (e, r, body)=>{
         if(e){
-            callback('Authorization failed. Please try again.', undefined)
+            callback('Authorization failed. Please try again. ' + e, undefined)
         } else if (r.body.message){
-            callback(body.message, undefined)
+            callback('message: ', body.message, 'error: ', e, undefined)
         } else{
             callback(undefined, {
                 token: r.body.token
